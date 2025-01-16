@@ -1,0 +1,16 @@
+<div class="chats-filters-input__wrapper">
+    <label class="tt-form-label">
+        <span class="tt-form-label__text">Имя</span>
+        <input placeholder="Искать..." type="text" class="tt-form-input" [formControl]="filterChatsControl">
+    </label>
+</div>
+
+<!-- button - это кастомный компонент, а не тег -->
+@for(chat of chats$ | async; track chat.id) {
+    <button 
+        chats
+        [chat]="chat"
+        [routerLink]="[chat.id]"
+        routerLinkActive="active"
+    ></button>
+}
