@@ -31,6 +31,11 @@ export class PostInputComponent {
     const textarea = event.target as HTMLTextAreaElement;
   }
 
+  onEnterPress(event: Event) {
+    event.preventDefault(); // Предотвращаем создание новой строки
+    this.onSendPost(); // Вызываем отправку поста
+  }
+
   onSendPost() {
     if (!this.postText.trim()) {
       return;

@@ -8,6 +8,7 @@
     [(ngModel)]="postText"
     class="hidden-textarea"
     (input)="onTextAreaInput($event)"
+    (keydown.enter)="onEnterPress($event)"
 ></textarea>
 
 
