@@ -33,9 +33,9 @@
         </div>
 
         <app-post-input
-            (created)="onCreated()"
             [postId]="post.id"
-            [isCommentInput]="true"
+            [profileAvatar]="profile()!.avatarUrl"
+            (created)="handlePost($event)"
         ></app-post-input>
     </main>
 }

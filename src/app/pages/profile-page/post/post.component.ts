@@ -9,6 +9,7 @@ import { CommentComponent } from './comment/comment.component';
 import { firstValueFrom } from 'rxjs';
 import { DateFormatComponent } from "../../../common-ui/date-format/date-format.component";
 import { FormsModule } from '@angular/forms';
+import { ProfileService } from '../../../data/services/profile.service';
 
 @Component({
   selector: 'app-post',
@@ -33,6 +34,14 @@ export class PostComponent implements OnInit {
 
   postService = inject(PostService);
 
+  isCommentInput = input(true);
+  postText = "";
+  postId = 0;
+  
+  feed = this.postService.posts;
+
+  profile = inject(ProfileService).me;
+
 
   ngOnInit() {
     this.comments.set(this.post()!.comments);
@@ -41,6 +50,32 @@ export class PostComponent implements OnInit {
   async onCreated() {
     const comments = await firstValueFrom(this.postService.getCommentsByPostId(this.post()!.id));
     this.comments.set(comments);
+  }
+
+
+  handlePost(data: any) {
+    const postText = data.postText;
+    const postId = data.postId;
+
+    if(this.isCommentInput()) {
+      firstValueFrom(this.postService.createComment({
+        text: postText,
+        authorId: this.profile()!.id,
+        postId: postId
+      })).then(() => {
+        this.postText = "";
+      })
+
+      return;
+    }
+
+    firstValueFrom(this.postService.createPost({
+      title: 'Клевый пост',
+      content: postText,
+      authorId: this.profile()!.id
+    })).then(() => {
+      this.postText = "";
+    })
   }
 
 }

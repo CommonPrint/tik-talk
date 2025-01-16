@@ -1,7 +1,7 @@
 <app-avatar-circle
-    *ngIf="profile() as profile"
+    *ngIf="profileAvatar"
     class="size32"
-    [avatarUrl]="profile.avatarUrl"
+    [avatarUrl]="profileAvatar"
 ></app-avatar-circle>
 
 <textarea
@@ -11,6 +11,6 @@
 ></textarea>
 
 
-<button class="btn-icon" (click)="onCreatePost()">
+<button class="btn-icon" (click)="onSendPost()">
     <svg icon="send-message" class="svg16"></svg>
 </button>
