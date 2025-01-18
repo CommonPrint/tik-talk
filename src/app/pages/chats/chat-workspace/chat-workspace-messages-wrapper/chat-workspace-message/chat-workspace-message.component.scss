@@ -5,11 +5,16 @@
 }
 
 :host.is-mine {
-    grid-template-columns: min-content 32px;
+    grid-template-columns: max-content 32px;
     justify-self: end;
 
     .message-container {
         order: -1;
+    }
+
+    .message-container strong {
+        display: flex;
+        justify-content: end;
     }
 }
 
@@ -24,4 +29,10 @@
     mask-position: 10% 94%;
 }
 
+
+:host.is-mine .message-text {
+    margin-left: auto;
+    color: var(--dark-color);
+    background-color: var(--primary-color);
+}
 
