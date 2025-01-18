@@ -3,13 +3,15 @@ import { firstValueFrom } from 'rxjs';
 import { ProfileService } from '../../data/services/profile.service';
 import { AvatarCircleComponent } from '../avatar-circle/avatar-circle.component';
 import { FormsModule, NgModel } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-message-input',
   standalone: true,
   imports: [
     AvatarCircleComponent,
-    FormsModule
+    FormsModule,
+    CommonModule
   ],
   templateUrl: './message-input.component.html',
   styleUrl: './message-input.component.scss'
