@@ -4,11 +4,9 @@ import { TimeFormatPipe } from '../../helpers/pipes/time-format.pipe';
 @Component({
   selector: 'app-date-format',
   standalone: true,
-  imports: [
-    TimeFormatPipe
-  ],
+  imports: [TimeFormatPipe],
   templateUrl: './date-format.component.html',
-  styleUrl: './date-format.component.scss'
+  styleUrl: './date-format.component.scss',
 })
 export class DateFormatComponent {
   dateFormat = input<string | null>();

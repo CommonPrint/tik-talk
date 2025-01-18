@@ -1,20 +1,23 @@
 import { Component, inject, OnDestroy } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { ProfileService } from '../../../data/services/profile.service';
-import { debounce, debounceTime, startWith, Subscription, switchMap } from 'rxjs';
+import {
+  debounce,
+  debounceTime,
+  startWith,
+  Subscription,
+  switchMap,
+} from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-profile-filters',
   standalone: true,
-  imports: [
-    ReactiveFormsModule
-  ],
+  imports: [ReactiveFormsModule],
   templateUrl: './profile-filters.component.html',
-  styleUrl: './profile-filters.component.scss'
+  styleUrl: './profile-filters.component.scss',
 })
 export class ProfileFiltersComponent implements OnDestroy {
-
   fb = inject(FormBuilder);
   profileService = inject(ProfileService);
 
@@ -22,10 +25,9 @@ export class ProfileFiltersComponent implements OnDestroy {
     firstName: [''],
     lastName: [''],
     stack: [''],
-  })
+  });
 
-  searchFormSub!: Subscription
-
+  searchFormSub!: Subscription;
 
   constructor() {
     this.searchFormSub = this.searchForm.valueChanges
@@ -36,15 +38,12 @@ export class ProfileFiltersComponent implements OnDestroy {
           return this.profileService.filterProfiles(formValue);
         }),
         // Очищает от утечки памяти
-        takeUntilDestroyed()
+        takeUntilDestroyed(),
       )
       .subscribe();
   }
 
-
   ngOnDestroy(): void {
-    this.searchFormSub.unsubscribe()
+    this.searchFormSub.unsubscribe();
   }
-  
-
 }

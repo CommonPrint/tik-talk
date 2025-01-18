@@ -8,18 +8,20 @@ import { SettingsPageComponent } from './pages/settings-page/settings-page.compo
 import { chatsRoutes } from './pages/chats/chatsRoutes';
 
 export const routes: Routes = [
-    {
-        path: '', component: LayoutComponent, children: [
-            {path: '', redirectTo: 'profile/me', pathMatch: 'full'},
-            {path: 'search', component: SearchPageComponent},
-            {path: 'profile/:id', component: ProfilePageComponent},
-            {path: 'settings', component: SettingsPageComponent},
-            {
-                path: 'chats', 
-                loadChildren: () => chatsRoutes
-            },
-        ],
-        canActivate: [canActivateAuth]
-    },
-    {path: 'login', component: LoginPageComponent}
+  {
+    path: '',
+    component: LayoutComponent,
+    children: [
+      { path: '', redirectTo: 'profile/me', pathMatch: 'full' },
+      { path: 'search', component: SearchPageComponent },
+      { path: 'profile/:id', component: ProfilePageComponent },
+      { path: 'settings', component: SettingsPageComponent },
+      {
+        path: 'chats',
+        loadChildren: () => chatsRoutes,
+      },
+    ],
+    canActivate: [canActivateAuth],
+  },
+  { path: 'login', component: LoginPageComponent },
 ];

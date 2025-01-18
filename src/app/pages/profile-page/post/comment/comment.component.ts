@@ -7,13 +7,9 @@ import { DateFormatComponent } from '../../../../common-ui/date-format/date-form
 @Component({
   selector: 'app-comment',
   standalone: true,
-  imports: [
-    AvatarCircleComponent,
-    DatePipe,
-    DateFormatComponent,
-  ],
+  imports: [AvatarCircleComponent, DatePipe, DateFormatComponent],
   templateUrl: './comment.component.html',
-  styleUrl: './comment.component.scss'
+  styleUrl: './comment.component.scss',
 })
 export class CommentComponent {
   comment = input<PostComment>();

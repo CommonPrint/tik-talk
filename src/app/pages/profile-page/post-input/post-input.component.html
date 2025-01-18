@@ -1,17 +1,16 @@
 <app-avatar-circle
-    *ngIf="profileAvatar"
-    class="size32"
-    [avatarUrl]="profileAvatar"
+  *ngIf="profileAvatar"
+  class="size32"
+  [avatarUrl]="profileAvatar"
 ></app-avatar-circle>
 
 <textarea
-    [(ngModel)]="postText"
-    class="hidden-textarea"
-    (input)="onTextAreaInput($event)"
-    (keydown.enter)="onEnterPress($event)"
+  [(ngModel)]="postText"
+  class="hidden-textarea"
+  (input)="onTextAreaInput($event)"
+  (keydown.enter)="onEnterPress($event)"
 ></textarea>
 
-
 <button class="btn-icon" (click)="onSendPost()">
-    <svg icon="send-message" class="svg16"></svg>
+  <svg icon="send-message" class="svg16"></svg>
 </button>

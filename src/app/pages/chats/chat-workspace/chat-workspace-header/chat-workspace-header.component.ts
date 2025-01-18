@@ -5,11 +5,9 @@ import { AvatarCircleComponent } from '../../../../common-ui/avatar-circle/avata
 @Component({
   selector: 'app-chat-workspace-header',
   standalone: true,
-  imports: [
-    AvatarCircleComponent,
-  ],
+  imports: [AvatarCircleComponent],
   templateUrl: './chat-workspace-header.component.html',
-  styleUrl: './chat-workspace-header.component.scss'
+  styleUrl: './chat-workspace-header.component.scss',
 })
 export class ChatWorkspaceHeaderComponent {
   profile = input.required<Profile>();

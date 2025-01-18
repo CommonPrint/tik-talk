@@ -3,7 +3,7 @@ import { ChatsBtnComponent } from '../chats-btn/chats-btn.component';
 import { ChatsService } from '../../../data/services/chats.service';
 import { AsyncPipe } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { FormControl, ReactiveFormsModule} from '@angular/forms';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { map, startWith, switchMap } from 'rxjs';
 
 @Component({
@@ -14,30 +14,30 @@ import { map, startWith, switchMap } from 'rxjs';
     AsyncPipe,
     RouterLink,
     RouterLinkActive,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   templateUrl: './chats-list.component.html',
-  styleUrl: './chats-list.component.scss'
+  styleUrl: './chats-list.component.scss',
 })
 export class ChatsListComponent {
   chatsService = inject(ChatsService);
 
   filterChatsControl = new FormControl('');
 
-  chats$ = this.chatsService.getMyChats()
-    .pipe(
-      switchMap(chats => {
-        return this.filterChatsControl.valueChanges
-          .pipe(
-            // Т.к. поисковик будет пустой, то дадим ему значение '', чтобы отобразились все чаты пользователя
-            startWith(''),
-            
-            map(inputValue => {
-              return chats.filter(chat => { 
-                return `${chat.userFrom.firstName} ${chat.userFrom.lastName}`.toLowerCase().includes(inputValue?.toLowerCase() ?? '')
-              })
-            })
-          )
-      })
-    )
+  chats$ = this.chatsService.getMyChats().pipe(
+    switchMap((chats) => {
+      return this.filterChatsControl.valueChanges.pipe(
+        // Т.к. поисковик будет пустой, то дадим ему значение '', чтобы отобразились все чаты пользователя
+        startWith(''),
+
+        map((inputValue) => {
+          return chats.filter((chat) => {
+            return `${chat.userFrom.firstName} ${chat.userFrom.lastName}`
+              .toLowerCase()
+              .includes(inputValue?.toLowerCase() ?? '');
+          });
+        }),
+      );
+    }),
+  );
 }

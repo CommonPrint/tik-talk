@@ -4,11 +4,10 @@ import { Component, Input } from '@angular/core';
   selector: 'svg[icon]',
   standalone: true,
   imports: [],
-  template:  '<svg:use [attr.href]="href"></svg:use>',
-  styles: ['']
+  template: '<svg:use [attr.href]="href"></svg:use>',
+  styles: [''],
 })
 export class SvgIconComponent {
-
   @Input() icon = '';
 
   get href() {

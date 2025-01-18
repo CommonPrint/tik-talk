@@ -1,5 +1,13 @@
-import { Component, ElementRef, inject, input, OnInit, Renderer2, signal } from '@angular/core';
-import { ChatWorkspaceMessageComponent } from "./chat-workspace-message/chat-workspace-message.component";
+import {
+  Component,
+  ElementRef,
+  inject,
+  input,
+  OnInit,
+  Renderer2,
+  signal,
+} from '@angular/core';
+import { ChatWorkspaceMessageComponent } from './chat-workspace-message/chat-workspace-message.component';
 import { MessageInputComponent } from '../../../../common-ui/message-input/message-input.component';
 import { ChatsService } from '../../../../data/services/chats.service';
 import { Chat, Message } from '../../../../data/interfaces/chats.interface';
@@ -10,16 +18,11 @@ import { ProfileService } from '../../../../data/services/profile.service';
 @Component({
   selector: 'app-chat-workspace-messages-wrapper',
   standalone: true,
-  imports: [
-    ChatWorkspaceMessageComponent,
-    MessageInputComponent,
-    CommonModule
-  ],
+  imports: [ChatWorkspaceMessageComponent, MessageInputComponent, CommonModule],
   templateUrl: './chat-workspace-messages-wrapper.component.html',
-  styleUrl: './chat-workspace-messages-wrapper.component.scss'
+  styleUrl: './chat-workspace-messages-wrapper.component.scss',
 })
 export class ChatWorkspaceMessagesWrapperComponent implements OnInit {
-
   hostElement = inject(ElementRef);
   r2 = inject(Renderer2);
   me = inject(ProfileService).me;
@@ -32,7 +35,7 @@ export class ChatWorkspaceMessagesWrapperComponent implements OnInit {
 
   uniqueDates = this.chatsService.uniqueDates;
 
-  today = {date: '', isToday: false};
+  today = { date: '', isToday: false };
   scrollContainer: any;
 
   rxJsTimer = timer(0, 10000);
@@ -40,21 +43,19 @@ export class ChatWorkspaceMessagesWrapperComponent implements OnInit {
 
   ngOnInit() {
     let date = new Date();
-    this.today.date = `${date.getFullYear()}-${date.getMonth() < 9 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1}-${date.getDate()}`
+    this.today.date = `${date.getFullYear()}-${date.getMonth() < 9 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1}-${date.getDate()}`;
     this.today.isToday = this.messages().includes(this.today);
 
     this.scrollContainer = this.hostElement.nativeElement.firstChild;
 
     // Периодический запрос на сервер для получения новых сообщений чата
-    this.rxJsTimer.pipe(
-      switchMap(() => this.chatsService.getChatById(this.chat().id))
-    )
-    .subscribe(() => {
-      this.messages = this.chatsService.activeChatMessages;
-  
-      this.scrollToBottom();
-    })
+    this.rxJsTimer
+      .pipe(switchMap(() => this.chatsService.getChatById(this.chat().id)))
+      .subscribe(() => {
+        this.messages = this.chatsService.activeChatMessages;
 
+        this.scrollToBottom();
+      });
   }
 
   ngAfterViewInit() {
@@ -62,9 +63,11 @@ export class ChatWorkspaceMessagesWrapperComponent implements OnInit {
   }
 
   async onSendMessage(msgText: string) {
-    const message: any = await firstValueFrom(this.chatsService.sendMessage(this.chat().id, msgText))
+    const message: any = await firstValueFrom(
+      this.chatsService.sendMessage(this.chat().id, msgText),
+    );
 
-     // Добавляем дополнительные свойства к новому сообщению
+    // Добавляем дополнительные свойства к новому сообщению
     // const patchedMessage = [{
     //     ...message,
     //     user: this.messages()[0].length > 0
@@ -89,9 +92,8 @@ export class ChatWorkspaceMessagesWrapperComponent implements OnInit {
   scrollToBottom(): void {
     this.scrollContainer.scroll({
       top: this.scrollContainer.scrollHeight,
-      behavior: 'smooth'
+      behavior: 'smooth',
     });
     // this.scrollContainer.scrollTop = this.scrollContainer.scrollTopMax;
   }
-
 }

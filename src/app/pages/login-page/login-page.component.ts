@@ -1,5 +1,10 @@
 import { Component, inject } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { AuthService } from '../../auth/auth.service';
 import { delay, from, map, take, tap } from 'rxjs';
 import { Router } from '@angular/router';
@@ -9,7 +14,7 @@ import { Router } from '@angular/router';
   standalone: true,
   imports: [ReactiveFormsModule],
   templateUrl: './login-page.component.html',
-  styleUrl: './login-page.component.scss'
+  styleUrl: './login-page.component.scss',
 })
 export class LoginPageComponent {
   authService = inject(AuthService);
@@ -17,20 +22,16 @@ export class LoginPageComponent {
 
   form = new FormGroup({
     username: new FormControl<string | null>(null, Validators.required),
-    password: new FormControl<string | null>(null, Validators.required)
+    password: new FormControl<string | null>(null, Validators.required),
   });
 
-
   onSubmit() {
-
-    if(this.form.valid) {
+    if (this.form.valid) {
       //@ts-ignore
-      this.authService.login(this.form.value)
-        .subscribe((res) => {
-          this.router.navigate(['']);
-          console.log(res);
-        })
+      this.authService.login(this.form.value).subscribe((res) => {
+        this.router.navigate(['']);
+        console.log(res);
+      });
     }
   }
-
 }
