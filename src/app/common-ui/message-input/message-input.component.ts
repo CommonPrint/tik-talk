@@ -4,6 +4,7 @@ import { ProfileService } from '../../data/services/profile.service';
 import { AvatarCircleComponent } from '../avatar-circle/avatar-circle.component';
 import { FormsModule, NgModel } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { SvgIconComponent } from '../svg-icon/svg-icon.component';
 
 @Component({
   selector: 'app-message-input',
@@ -11,7 +12,8 @@ import { CommonModule } from '@angular/common';
   imports: [
     AvatarCircleComponent,
     FormsModule,
-    CommonModule
+    CommonModule,
+    SvgIconComponent
   ],
   templateUrl: './message-input.component.html',
   styleUrl: './message-input.component.scss'
