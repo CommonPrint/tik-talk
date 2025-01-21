@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "nx serve",
+    "start": "nx run tik-talk:serve",
     "build": "nx build",
     "watch": "nx build --watch --configuration development",
     "test": "nx test"
@@ -27,6 +27,9 @@
     "@angular-devkit/build-angular": "^18.2.12",
     "@angular-devkit/core": "^18.2.12",
     "@angular-devkit/schematics": "^18.2.12",
+    "@angular-eslint/eslint-plugin": "^18.3.0",
+    "@angular-eslint/eslint-plugin-template": "^18.3.0",
+    "@angular-eslint/template-parser": "^18.3.0",
     "@angular/cli": "^18.2.12",
     "@angular/compiler-cli": "^18.2.0",
     "@nx/angular": "20.3.2",
@@ -37,6 +40,7 @@
     "@swc/core": "~1.5.7",
     "@swc/helpers": "~0.5.11",
     "@types/jasmine": "~5.1.0",
+    "@typescript-eslint/utils": "^7.16.0",
     "eslint-config-prettier": "^10.0.1",
     "eslint-plugin-prettier": "^5.2.2",
     "jasmine-core": "~5.2.0",
