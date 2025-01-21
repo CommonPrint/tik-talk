@@ -1,5 +1,5 @@
-@import "fonts";
-@import "margins";
+@import 'fonts';
+@import 'margins';
 
 :root {
   --dark-color: #000;
@@ -23,7 +23,7 @@
 }
 
 body {
-  font-family: "JetBrains Mono", sans-serif;
+  font-family: 'JetBrains Mono', sans-serif;
   background: var(--dark-color);
   color: var(--light-color);
   background-image: url(/assets/imgs/background.jpg);
@@ -81,7 +81,7 @@ li {
   position: relative;
 
   &:before {
-    content: "";
+    content: '';
     position: absolute;
     z-index: -1;
     bottom: -4px;
@@ -118,7 +118,7 @@ li {
 }
 
 .medium-text {
-  font-family: "JetBrains Mono", sans-serif;
+  font-family: 'JetBrains Mono', sans-serif;
   font-size: 12px;
   font-weight: 500;
   line-height: 16px;
@@ -147,7 +147,7 @@ li {
   font-weight: 400;
   font-size: 14px;
   line-height: 21px;
-  font-family: "JetBrains Mono", sans-serif;
+  font-family: 'JetBrains Mono', sans-serif;
   color: var(--light-color);
 }
 

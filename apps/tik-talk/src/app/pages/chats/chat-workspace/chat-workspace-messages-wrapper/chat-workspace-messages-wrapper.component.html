@@ -13,7 +13,7 @@
     }
 
     @for (message of messages(); track message.id) {
-      @if (date === message.createdAt.split("T")[0]) {
+      @if (date === message.createdAt.split('T')[0]) {
         <app-chat-workspace-message
           [message]="message"
         ></app-chat-workspace-message>

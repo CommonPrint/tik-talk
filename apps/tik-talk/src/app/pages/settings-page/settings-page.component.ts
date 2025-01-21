@@ -56,7 +56,7 @@ export class SettingsPageComponent {
         ...this.form.value,
         stack: this.splitStack(this.form.value.stack),
       }),
-    )
+    );
   }
 
   splitStack(stack: string | null | string[] | undefined): string[] {
