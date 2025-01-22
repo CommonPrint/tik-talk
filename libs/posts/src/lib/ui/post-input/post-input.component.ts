@@ -11,6 +11,9 @@ import {
 import { NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {AvatarCircleComponent, SvgIconComponent} from '@tt/common-ui';
+import { firstValueFrom } from 'rxjs';
+import { ProfileService } from '@tt/profile';
+import { PostService } from '../../data/services/post.service';
 
 @Component({
   selector: 'app-post-input',
@@ -22,34 +25,54 @@ import {AvatarCircleComponent, SvgIconComponent} from '@tt/common-ui';
 export class PostInputComponent {
   // Renderer2 позволяет манипулировать элементом не изменяя сам DOM
 
-  @Input() profileAvatar!: string | null | undefined;
+  r2 = inject(Renderer2);
+  postService = inject(PostService);
 
+  isCommentInput = input(false);
   postId = input<number>(0);
-  postText = '';
+  profile = inject(ProfileService).me;
 
   @Output() created = new EventEmitter();
 
+  @HostBinding('class.comment')
+  get isComment() {
+    return this.isCommentInput();
+  }
+
+  postText = '';
+
   onTextAreaInput(event: Event) {
     const textarea = event.target as HTMLTextAreaElement;
+
+    this.r2.setStyle(textarea, 'height', 'auto');
+    this.r2.setStyle(textarea, 'height', textarea.scrollHeight + 'px');
   }
 
-  onEnterPress(event: Event) {
-    event.preventDefault(); // Предотвращаем создание новой строки
-    this.onSendPost(); // Вызываем отправку поста
-  }
+  onCreatePost() {
+    if (!this.postText) return;
 
-  onSendPost() {
-    if (!this.postText.trim()) {
+    if (this.isCommentInput()) {
+      firstValueFrom(
+        this.postService.createComment({
+          text: this.postText,
+          authorId: this.profile()!.id,
+          postId: this.postId(),
+        })
+      ).then(() => {
+        this.postText = '';
+        this.created.emit();
+      });
       return;
     }
 
-    const data = {
-      postText: this.postText,
-      postId: this.postId(),
-    };
-
-    // Передадим значение [postText] родительскому компоненту
-    this.created.emit(data);
-    this.postText = '';
+    firstValueFrom(
+      this.postService.createPost({
+        title: 'Клевый пост',
+        content: this.postText,
+        authorId: this.profile()!.id,
+      })
+    ).then(() => {
+      this.postText = '';
+    });
   }
 }

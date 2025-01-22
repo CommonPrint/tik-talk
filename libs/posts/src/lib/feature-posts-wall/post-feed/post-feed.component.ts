@@ -1,16 +1,14 @@
 import {
   Component,
   ElementRef,
-  HostBinding,
+  HostListener,
   inject,
-  input,
   Renderer2,
 } from '@angular/core';
-import { PostInputComponent } from '../../ui/post-input/post-input.component';
+import { firstValueFrom, fromEvent } from 'rxjs';
+import {PostService} from '../../data';
+import {PostInputComponent} from '../../ui';
 import { PostComponent } from '../post/post.component';
-import { firstValueFrom} from 'rxjs';
-import { PostService } from '../../data';
-import { ProfileService } from '@tt/profile';
 
 @Component({
   selector: 'app-post-feed',
@@ -24,24 +22,12 @@ export class PostFeedComponent {
   hostElement = inject(ElementRef);
   r2 = inject(Renderer2);
 
-  isCommentInput = input(false);
-  postText = '';
-  postId = 0;
-
   feed = this.postService.posts;
 
-  profile = inject(ProfileService).me;
-
-  @HostBinding('class.comment')
-  get isComment() {
-    return this.isCommentInput();
+  @HostListener('window:resize')
+  onWindowResize() {
+    this.resizeFeed();
   }
-
-  // @HostListener('window:resize')
-  // @DebounceClick(300)
-  // onWindowResize() {
-  //   this.resizeFeed();
-  // }
 
   constructor() {
     firstValueFrom(this.postService.fetchPosts());
@@ -49,46 +35,17 @@ export class PostFeedComponent {
 
   ngAfterViewInit() {
     this.resizeFeed();
+
+    fromEvent(window, 'resize').subscribe(() => {
+      console.log(12313);
+    });
   }
 
   resizeFeed() {
     const { top } = this.hostElement.nativeElement.getBoundingClientRect();
 
     const height = window.innerHeight - top - 24 - 24;
+
     this.r2.setStyle(this.hostElement.nativeElement, 'height', `${height}px`);
   }
-
-  handlePost(data: any) {
-    const postText = data.postText;
-    const postId = data.postId;
-
-    if (this.isCommentInput()) {
-      firstValueFrom(
-        this.postService.createComment({
-          text: postText,
-          authorId: this.profile()!.id,
-          postId: postId,
-        }),
-      ).then(() => {
-        this.postText = '';
-      });
-
-      return;
-    }
-
-    firstValueFrom(
-      this.postService.createPost({
-        title: 'Клевый пост',
-        content: postText,
-        authorId: this.profile()!.id,
-      }),
-    ).then(() => {
-      this.postText = '';
-    });
-  }
 }
-
-function DebounceClick(arg0: number): (target: PostFeedComponent, propertyKey: "onWindowResize", descriptor: TypedPropertyDescriptor<() => void>) => void | TypedPropertyDescriptor<() => void> {
-  throw new Error('Function not implemented.');
-}
-

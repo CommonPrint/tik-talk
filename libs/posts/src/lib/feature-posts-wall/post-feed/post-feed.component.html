@@ -1,8 +1,5 @@
-<app-post-input
-  [profileAvatar]="profile()!.avatarUrl"
-  (created)="handlePost($event)"
-></app-post-input>
+<app-post-input></app-post-input>
 
 @for (post of feed(); track post.id) {
-  <app-post [post]="post"></app-post>
+<app-post [post]="post"></app-post>
 }
