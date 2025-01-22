@@ -5,9 +5,9 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { AuthService } from '../../auth/auth.service';
-import { delay, from, map, take, tap } from 'rxjs';
 import { Router } from '@angular/router';
+
+import { AuthService } from '@tt/auth';
 
 @Component({
   selector: 'app-login-page',
