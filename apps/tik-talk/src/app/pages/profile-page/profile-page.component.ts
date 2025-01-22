@@ -6,8 +6,9 @@ import { firstValueFrom, switchMap } from 'rxjs';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { AsyncPipe } from '@angular/common';
 import { ImgUrlPipe } from '../../helpers/pipes/img-url.pipe';
-import { PostFeedComponent } from './post-feed/post-feed.component';
 import { ChatsService } from '../../data/services/chats.service';
+import { PostFeedComponent } from '@tt/posts';
+
 
 @Component({
   selector: 'app-profile-page',

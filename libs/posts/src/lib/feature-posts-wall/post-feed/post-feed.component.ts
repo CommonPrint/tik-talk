@@ -9,7 +9,7 @@ import {
   Output,
   Renderer2,
 } from '@angular/core';
-import { PostInputComponent } from '../post-input/post-input.component';
+import { PostInputComponent } from '../../ui/post-input/post-input.component';
 import { PostComponent } from '../post/post.component';
 import { PostService } from '../../../data/services/post.service';
 import { debounceTime, firstValueFrom, fromEvent } from 'rxjs';

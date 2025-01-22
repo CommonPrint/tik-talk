@@ -25,10 +25,15 @@
   "generators": {
     "@nx/angular:library": {
       "linter": "eslint",
-      "unitTestRunner": "none"
+      "unitTestRunner": "none",
+      "prefix": "tt",
+      "style": "scss",
+      "skipTests": true
     },
     "@nx/angular:component": {
-      "style": "css"
+      "style": "scss",
+      "skipTests": true,
+      "standalone": true
     }
   }
 }

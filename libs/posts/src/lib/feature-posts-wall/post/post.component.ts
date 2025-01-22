@@ -10,15 +10,15 @@ import {
 } from '@angular/core';
 import { AvatarCircleComponent } from '../../../common-ui/avatar-circle/avatar-circle.component';
 import { DatePipe } from '@angular/common';
-import { Post, PostComment } from '../../../data/interfaces/post.interface';
-import { PostInputComponent } from '../post-input/post-input.component';
+import { PostInputComponent } from '../../ui/post-input/post-input.component';
 import { PostService } from '../../../data/services/post.service';
 import { SvgIconComponent } from '../../../common-ui/svg-icon/svg-icon.component';
-import { CommentComponent } from './comment/comment.component';
+import { CommentComponent } from '../../ui/comment/comment.component';
 import { firstValueFrom } from 'rxjs';
 import { DateFormatComponent } from '../../../common-ui/date-format/date-format.component';
 import { FormsModule } from '@angular/forms';
 import { ProfileService } from '../../../data/services/profile.service';
+import { Post, PostComment } from '../../data';
 
 @Component({
   selector: 'app-post',

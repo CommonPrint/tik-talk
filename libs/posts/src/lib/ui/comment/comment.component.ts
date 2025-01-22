@@ -1,8 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component, input } from '@angular/core';
-import { PostComment } from '../../../../data/interfaces/post.interface';
-import { AvatarCircleComponent } from '../../../../common-ui/avatar-circle/avatar-circle.component';
-import { DateFormatComponent } from '../../../../common-ui/date-format/date-format.component';
+import { PostComment } from '../../data';
 
 @Component({
   selector: 'app-comment',

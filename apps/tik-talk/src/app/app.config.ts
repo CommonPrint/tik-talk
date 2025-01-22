@@ -3,7 +3,7 @@ import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
-import { authTokenInterceptor } from './auth/auth.interceptor';
+import { authTokenInterceptor } from '@tt/auth';
 
 export const appConfig: ApplicationConfig = {
   providers: [
