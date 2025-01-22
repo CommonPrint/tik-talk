@@ -1,4 +1,4 @@
-// import { Profile } from 
+import { Profile } from "@tt/profile";
 
 export interface PostCreateDto {
     title: string;

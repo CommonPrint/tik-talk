@@ -1,20 +1,16 @@
 import {
   Component,
   ElementRef,
-  EventEmitter,
   HostBinding,
-  HostListener,
   inject,
   input,
-  Output,
   Renderer2,
 } from '@angular/core';
 import { PostInputComponent } from '../../ui/post-input/post-input.component';
 import { PostComponent } from '../post/post.component';
-import { PostService } from '../../../data/services/post.service';
-import { debounceTime, firstValueFrom, fromEvent } from 'rxjs';
-import { DebounceClick } from '../../../helpers/decorators/debounce-click';
-import { ProfileService } from '../../../data/services/profile.service';
+import { firstValueFrom} from 'rxjs';
+import { PostService } from '../../data';
+import { ProfileService } from '@tt/profile';
 
 @Component({
   selector: 'app-post-feed',
@@ -41,11 +37,11 @@ export class PostFeedComponent {
     return this.isCommentInput();
   }
 
-  @HostListener('window:resize')
-  @DebounceClick(300)
-  onWindowResize() {
-    this.resizeFeed();
-  }
+  // @HostListener('window:resize')
+  // @DebounceClick(300)
+  // onWindowResize() {
+  //   this.resizeFeed();
+  // }
 
   constructor() {
     firstValueFrom(this.postService.fetchPosts());
@@ -91,3 +87,8 @@ export class PostFeedComponent {
     });
   }
 }
+
+function DebounceClick(arg0: number): (target: PostFeedComponent, propertyKey: "onWindowResize", descriptor: TypedPropertyDescriptor<() => void>) => void | TypedPropertyDescriptor<() => void> {
+  throw new Error('Function not implemented.');
+}
+

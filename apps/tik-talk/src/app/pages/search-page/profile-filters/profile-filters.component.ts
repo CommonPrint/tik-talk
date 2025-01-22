@@ -1,14 +1,13 @@
 import { Component, inject, OnDestroy } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { ProfileService } from '../../../data/services/profile.service';
 import {
-  debounce,
   debounceTime,
   startWith,
   Subscription,
   switchMap,
 } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ProfileService } from '@tt/profile';
 
 @Component({
   selector: 'app-profile-filters',

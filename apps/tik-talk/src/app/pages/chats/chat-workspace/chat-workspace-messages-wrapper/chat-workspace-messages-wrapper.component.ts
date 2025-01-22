@@ -5,7 +5,6 @@ import {
   input,
   OnInit,
   Renderer2,
-  signal,
 } from '@angular/core';
 import { ChatWorkspaceMessageComponent } from './chat-workspace-message/chat-workspace-message.component';
 import { MessageInputComponent } from '../../../../common-ui/message-input/message-input.component';
@@ -13,7 +12,7 @@ import { ChatsService } from '../../../../data/services/chats.service';
 import { Chat, Message } from '../../../../data/interfaces/chats.interface';
 import { firstValueFrom, switchMap, timer } from 'rxjs';
 import { CommonModule, DatePipe } from '@angular/common';
-import { ProfileService } from '../../../../data/services/profile.service';
+import { ProfileService } from '@tt/profile';
 
 @Component({
   selector: 'app-chat-workspace-messages-wrapper',
@@ -66,6 +65,8 @@ export class ChatWorkspaceMessagesWrapperComponent implements OnInit {
     const message: any = await firstValueFrom(
       this.chatsService.sendMessage(this.chat().id, msgText),
     );
+
+    console.log('msgText: ', msgText);
 
     // Добавляем дополнительные свойства к новому сообщению
     // const patchedMessage = [{

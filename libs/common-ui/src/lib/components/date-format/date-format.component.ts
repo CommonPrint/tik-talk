@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { TimeFormatPipe } from '../../helpers/pipes/time-format.pipe';
+import { TimeFormatPipe } from '@tt/common-ui';
 
 @Component({
   selector: 'app-date-format',

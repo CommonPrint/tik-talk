@@ -1,31 +1,23 @@
 import {
   Component,
-  EventEmitter,
-  HostBinding,
   inject,
   input,
   OnInit,
-  Output,
   signal,
 } from '@angular/core';
-import { AvatarCircleComponent } from '../../../common-ui/avatar-circle/avatar-circle.component';
-import { DatePipe } from '@angular/common';
 import { PostInputComponent } from '../../ui/post-input/post-input.component';
-import { PostService } from '../../../data/services/post.service';
-import { SvgIconComponent } from '../../../common-ui/svg-icon/svg-icon.component';
 import { CommentComponent } from '../../ui/comment/comment.component';
 import { firstValueFrom } from 'rxjs';
-import { DateFormatComponent } from '../../../common-ui/date-format/date-format.component';
 import { FormsModule } from '@angular/forms';
-import { ProfileService } from '../../../data/services/profile.service';
-import { Post, PostComment } from '../../data';
+import { Post, PostComment, PostService } from '../../data';
+import { AvatarCircleComponent, DateFormatComponent, SvgIconComponent } from '@tt/common-ui';
+import {ProfileService} from '@tt/profile'
 
 @Component({
   selector: 'app-post',
   standalone: true,
   imports: [
     AvatarCircleComponent,
-    DatePipe,
     PostInputComponent,
     SvgIconComponent,
     CommentComponent,
@@ -86,6 +78,7 @@ export class PostComponent implements OnInit {
         authorId: this.profile()!.id,
       }),
     ).then(() => {
+      console.log('postText: ', this.postText);
       this.postText = '';
     });
   }

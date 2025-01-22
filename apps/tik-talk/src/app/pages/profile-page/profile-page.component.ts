@@ -1,13 +1,13 @@
 import { Component, inject, signal } from '@angular/core';
 import { ProfileHeaderComponent } from '../../common-ui/profile-header/profile-header.component';
-import { ProfileService } from '../../data/services/profile.service';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { firstValueFrom, switchMap } from 'rxjs';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { AsyncPipe } from '@angular/common';
-import { ImgUrlPipe } from '../../helpers/pipes/img-url.pipe';
 import { ChatsService } from '../../data/services/chats.service';
 import { PostFeedComponent } from '@tt/posts';
+import { ImgUrlPipe } from '@tt/common-ui';
+import { ProfileService } from '@tt/profile';
 
 
 @Component({
