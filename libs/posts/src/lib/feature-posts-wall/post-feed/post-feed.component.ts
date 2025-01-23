@@ -9,13 +9,15 @@ import { firstValueFrom, fromEvent } from 'rxjs';
 import {PostService} from '../../data';
 import {PostInputComponent} from '../../ui';
 import { PostComponent } from '../post/post.component';
+import { TestDirective } from './test.directive';
+import { COLOR } from '../post/color.token';
 
 @Component({
   selector: 'app-post-feed',
   standalone: true,
-  imports: [PostInputComponent, PostComponent],
+  imports: [PostInputComponent, PostComponent, TestDirective],
   templateUrl: './post-feed.component.html',
-  styleUrl: './post-feed.component.scss',
+  styleUrl: './post-feed.component.scss'
 })
 export class PostFeedComponent {
   postService = inject(PostService);

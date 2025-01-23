@@ -1,9 +1,9 @@
 import {
   Component,
   EventEmitter,
+  Host,
   HostBinding,
   inject,
-  Input,
   input,
   Output,
   Renderer2,
@@ -14,6 +14,7 @@ import {AvatarCircleComponent, SvgIconComponent} from '@tt/common-ui';
 import { firstValueFrom } from 'rxjs';
 import { ProfileService } from '@tt/profile';
 import { PostService } from '../../data/services/post.service';
+import { COLOR } from '../../feature-posts-wall/post/color.token';
 
 @Component({
   selector: 'app-post-input',
@@ -21,6 +22,22 @@ import { PostService } from '../../data/services/post.service';
   imports: [AvatarCircleComponent, NgIf, SvgIconComponent, FormsModule],
   templateUrl: './post-input.component.html',
   styleUrl: './post-input.component.scss',
+  providers: [
+    {
+      provide: COLOR,
+      useFactory: (postService: PostService) => {
+        // @ts-ignore
+        return postService.id > 400 ? 'white': 'red';
+      },
+      deps: [PostService],
+      multi: true
+    },
+    {
+      provide: COLOR,
+      useValue: 'orange',
+      multi: true
+    }
+  ]
 })
 export class PostInputComponent {
   // Renderer2 позволяет манипулировать элементом не изменяя сам DOM
