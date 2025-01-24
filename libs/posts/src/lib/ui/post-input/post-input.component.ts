@@ -1,7 +1,6 @@
 import {
   Component,
   EventEmitter,
-  Host,
   HostBinding,
   inject,
   input,
@@ -12,32 +11,15 @@ import { NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {AvatarCircleComponent, SvgIconComponent} from '@tt/common-ui';
 import { firstValueFrom } from 'rxjs';
-import { ProfileService } from '@tt/profile';
-import { PostService } from '../../data/services/post.service';
-import { COLOR } from '../../feature-posts-wall/post/color.token';
+import { GlobalStoreService } from '@tt/shared';
+import { PostService } from '../../data';
 
 @Component({
   selector: 'app-post-input',
   standalone: true,
   imports: [AvatarCircleComponent, NgIf, SvgIconComponent, FormsModule],
   templateUrl: './post-input.component.html',
-  styleUrl: './post-input.component.scss',
-  providers: [
-    {
-      provide: COLOR,
-      useFactory: (postService: PostService) => {
-        // @ts-ignore
-        return postService.id > 400 ? 'white': 'red';
-      },
-      deps: [PostService],
-      multi: true
-    },
-    {
-      provide: COLOR,
-      useValue: 'orange',
-      multi: true
-    }
-  ]
+  styleUrl: './post-input.component.scss'
 })
 export class PostInputComponent {
   // Renderer2 позволяет манипулировать элементом не изменяя сам DOM
@@ -47,7 +29,7 @@ export class PostInputComponent {
 
   isCommentInput = input(false);
   postId = input<number>(0);
-  profile = inject(ProfileService).me;
+  profile = inject(GlobalStoreService).me;
 
   @Output() created = new EventEmitter();
 

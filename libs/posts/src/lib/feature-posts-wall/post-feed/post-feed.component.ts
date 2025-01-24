@@ -10,7 +10,6 @@ import {PostService} from '../../data';
 import {PostInputComponent} from '../../ui';
 import { PostComponent } from '../post/post.component';
 import { TestDirective } from './test.directive';
-import { COLOR } from '../post/color.token';
 
 @Component({
   selector: 'app-post-feed',

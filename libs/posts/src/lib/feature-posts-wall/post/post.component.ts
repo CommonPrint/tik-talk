@@ -4,9 +4,7 @@ import {AvatarCircleComponent, SvgIconComponent} from '@tt/common-ui';
 import { firstValueFrom } from 'rxjs';
 import {Post, PostComment, PostService} from '../../data';
 import {CommentComponent, PostInputComponent} from '../../ui';
-import { TestDirective } from '../post-feed/test.directive';
 import { COLOR, TIMELINE_SERVICE } from './color.token';
-import {ChatsService} from '../../../../../../apps/tik-talk/src/app/data/services/chats.service'
 
 @Component({
   selector: 'app-post',
