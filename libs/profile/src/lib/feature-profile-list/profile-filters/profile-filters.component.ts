@@ -8,6 +8,8 @@ import {
 } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ProfileService } from '@tt/profile';
+import { Store } from '@ngrx/store';
+import { profileActions } from '../../data';
 
 @Component({
   selector: 'app-profile-filters',
@@ -19,6 +21,7 @@ import { ProfileService } from '@tt/profile';
 export class ProfileFiltersComponent implements OnDestroy {
   fb = inject(FormBuilder);
   profileService = inject(ProfileService);
+  store = inject(Store);
 
   searchForm = this.fb.group({
     firstName: [''],
@@ -33,13 +36,12 @@ export class ProfileFiltersComponent implements OnDestroy {
       .pipe(
         startWith({}),
         debounceTime(300),
-        switchMap((formValue) => {
-          return this.profileService.filterProfiles(formValue);
-        }),
         // Очищает от утечки памяти
         takeUntilDestroyed(),
       )
-      .subscribe();
+      .subscribe(formValue => {
+        this.store.dispatch(profileActions.filterEvents({filters: formValue}));
+      });
   }
 
   ngOnDestroy(): void {

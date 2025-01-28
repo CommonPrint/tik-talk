@@ -1,7 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { ProfileFiltersComponent } from '../profile-filters/profile-filters.component';
-import { ProfileService } from '@tt/profile';
 import { ProfileCardComponent } from '../../ui/profile-card/profile-card.component';
+import { Store } from '@ngrx/store';
+import { selectFilteredProfiles } from '../../data';
 
 @Component({
   selector: 'app-search-page',
@@ -11,8 +12,9 @@ import { ProfileCardComponent } from '../../ui/profile-card/profile-card.compone
   styleUrl: './search-page.component.scss',
 })
 export class SearchPageComponent {
-  profileService = inject(ProfileService);
-  profiles = this.profileService.filteredProfiles;
+  store = inject(Store);
+  
+  profiles = this.store.selectSignal(selectFilteredProfiles);
 
   constructor() {}
 }
