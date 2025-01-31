@@ -21,6 +21,7 @@ export interface Message {
 }
 
 export interface LastMessageRes {
+  companion: any;
   id: number;
   userFrom: Profile;
   message: string | null;
