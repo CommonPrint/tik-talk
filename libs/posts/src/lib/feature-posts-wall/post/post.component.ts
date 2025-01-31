@@ -21,7 +21,8 @@ import { COLOR, TIMELINE_SERVICE } from './color.token';
   providers: [
     {
       provide: TIMELINE_SERVICE,
-      useValue: PostService,
+      useExisting: PostService
+      // useValue: PostService,
     }
   ]
 })
@@ -42,6 +43,8 @@ export class PostComponent implements OnInit {
     const comments = await firstValueFrom(
       this.postService.getCommentsByPostId(this.post()!.id)
     );
+
     this.comments.set(comments);
   }
+
 }

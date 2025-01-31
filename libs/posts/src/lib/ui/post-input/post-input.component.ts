@@ -12,7 +12,8 @@ import { FormsModule } from '@angular/forms';
 import {AvatarCircleComponent, SvgIconComponent} from '@tt/common-ui';
 import { firstValueFrom } from 'rxjs';
 import { GlobalStoreService } from '@tt/shared';
-import { PostService } from '../../data';
+import { postActions, PostService } from '../../data';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-post-input',
@@ -26,6 +27,8 @@ export class PostInputComponent {
 
   r2 = inject(Renderer2);
   postService = inject(PostService);
+
+  store = inject(Store);
 
   isCommentInput = input(false);
   postId = input<number>(0);
@@ -72,6 +75,7 @@ export class PostInputComponent {
       })
     ).then(() => {
       this.postText = '';
+      this.store.dispatch(postActions.postsLoaded());
     });
   }
 }

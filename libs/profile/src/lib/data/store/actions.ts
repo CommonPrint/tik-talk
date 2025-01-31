@@ -1,5 +1,5 @@
-import {createActionGroup, props} from '@ngrx/store';
-import { Profile } from '@tt/interfaces/profile';
+import {createAction, createActionGroup, props} from '@ngrx/store';
+import { Profile, ProfileFilter } from '@tt/interfaces/profile';
 
 export const profileActions = createActionGroup({
     source: 'profile',
@@ -8,3 +8,8 @@ export const profileActions = createActionGroup({
         'profiles loaded': props<{profiles: Profile[]}>()
     }
 });
+
+export const setFilterValues = createAction(
+    '[Profile] Set Filter Values',
+    props<{filters: ProfileFilter}>()
+);

@@ -1,6 +1,6 @@
 import { createFeature, createReducer, on } from "@ngrx/store";
-import { Profile } from "@tt/interfaces/profile";
-import { profileActions } from "./actions";
+import { Profile, ProfileFilter } from "@tt/interfaces/profile";
+import { profileActions, setFilterValues} from "./actions";
 
 export interface ProfileState {
     profiles: Profile[],
@@ -11,6 +11,13 @@ export const initialState: ProfileState = {
     profiles: [],
     profileFilters: {}
 }
+
+export const initialFilterState: ProfileFilter = {
+    firstName: '',
+    lastName: '',
+    stack: ''
+}
+
 
 export const profileFeature = createFeature({
     name: 'profileFeature',
@@ -23,4 +30,13 @@ export const profileFeature = createFeature({
             }
         })
     ),
-})
+});
+
+
+export const filterReducer = createReducer(
+    initialFilterState,
+    on(setFilterValues, (state, {filters}) => ({
+        ...state,
+        ...filters
+    }))
+)

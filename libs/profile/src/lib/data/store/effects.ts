@@ -17,7 +17,9 @@ export class ProfileEffects {
             switchMap(({filters}) => {
                 return this.profileService.filterProfiles(filters)
             }),
-            map(res => profileActions.profilesLoaded({profiles: res.items}))
+            map(res => {
+                return profileActions.profilesLoaded({profiles: res.items})
+            })
         )
     });
 }

@@ -6,10 +6,11 @@ import {
   Renderer2,
 } from '@angular/core';
 import { firstValueFrom, fromEvent } from 'rxjs';
-import {PostService} from '../../data';
+import {Post, postActions, postFeature, PostService, selectPosts} from '../../data';
 import {PostInputComponent} from '../../ui';
 import { PostComponent } from '../post/post.component';
 import { TestDirective } from './test.directive';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-post-feed',
@@ -23,7 +24,9 @@ export class PostFeedComponent {
   hostElement = inject(ElementRef);
   r2 = inject(Renderer2);
 
-  feed = this.postService.posts;
+  store = inject(Store);
+
+  feed = this.store.selectSignal(selectPosts);
 
   @HostListener('window:resize')
   onWindowResize() {
@@ -31,16 +34,14 @@ export class PostFeedComponent {
   }
 
   constructor() {
-    firstValueFrom(this.postService.fetchPosts());
+    // firstValueFrom(this.postService.fetchPosts());
+    this.store.dispatch(postActions.postsLoaded());
   }
 
   ngAfterViewInit() {
     this.resizeFeed();
-
-    fromEvent(window, 'resize').subscribe(() => {
-      console.log(12313);
-    });
   }
+
 
   resizeFeed() {
     const { top } = this.hostElement.nativeElement.getBoundingClientRect();

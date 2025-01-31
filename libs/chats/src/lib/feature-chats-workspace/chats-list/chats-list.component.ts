@@ -29,7 +29,6 @@ export class ChatsListComponent {
       return this.filterChatsControl.valueChanges.pipe(
         // Т.к. поисковик будет пустой, то дадим ему значение '', чтобы отобразились все чаты пользователя
         startWith(''),
-
         map((inputValue) => {
           return chats.filter((chat) => {
             return `${chat.userFrom.firstName} ${chat.userFrom.lastName}`

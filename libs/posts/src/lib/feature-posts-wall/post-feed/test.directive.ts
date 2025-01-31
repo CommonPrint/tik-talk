@@ -10,7 +10,6 @@ export class TestDirective {
     color = inject(COLOR);
 
     constructor() {
-        console.log(this.color);
         this.elRef.nativeElement.style.border = `10px solid ${this.color[0]}`;
     }
 }
