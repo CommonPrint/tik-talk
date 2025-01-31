@@ -10,7 +10,7 @@ import {
 } from 'rxjs';
 import { ProfileService } from '@tt/profile';
 import { Store } from '@ngrx/store';
-import { profileActions, selectFilteValues, setFilterValues} from '../../data';
+import { profileActions, selectFilterValues, setFilterValues} from '../../data';
 import { ProfileFilter } from '@tt/interfaces/profile';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
@@ -52,7 +52,7 @@ export class ProfileFiltersComponent implements OnDestroy {
         this.store.dispatch(setFilterValues({filters: formValue}))
       });
 
-    this.store.select(selectFilteValues).subscribe((filters) => {
+    this.store.select(selectFilterValues).subscribe((filters) => {
       this.searchForm.patchValue(filters, {emitEvent: false})
       this.store.dispatch(profileActions.filterEvents({filters}));
     })

@@ -4,7 +4,8 @@ import { AsyncPipe } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { map, startWith, switchMap } from 'rxjs';
-import { ChatsService } from '../../data';
+import { chatActions, ChatsService, selectChats } from '../../data';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-chats-list',
@@ -23,20 +24,11 @@ export class ChatsListComponent {
   chatsService = inject(ChatsService);
 
   filterChatsControl = new FormControl('');
+  store = inject(Store);
 
-  chats$ = this.chatsService.getMyChats().pipe(
-    switchMap((chats) => {
-      return this.filterChatsControl.valueChanges.pipe(
-        // Т.к. поисковик будет пустой, то дадим ему значение '', чтобы отобразились все чаты пользователя
-        startWith(''),
-        map((inputValue) => {
-          return chats.filter((chat) => {
-            return `${chat.userFrom.firstName} ${chat.userFrom.lastName}`
-              .toLowerCase()
-              .includes(inputValue?.toLowerCase() ?? '');
-          });
-        }),
-      );
-    }),
-  );
+  chats$ = this.store.selectSignal(selectChats);
+
+  constructor() {
+    this.store.dispatch(chatActions.chatsLoaded());
+  }
 }

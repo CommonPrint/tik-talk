@@ -8,18 +8,20 @@ import { authTokenInterceptor } from '@tt/auth';
 import { provideEffects } from '@ngrx/effects';
 import { PostEffects, postFeature } from 'libs/posts/src/lib/data';
 import { filterReducer, ProfileEffects} from 'libs/profile/src/lib/data';
+import { ChatEffects, chatFeature } from '@tt/chats';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideHttpClient(withInterceptors([authTokenInterceptor])),
-    // provideStore(),
     provideStore(
-      { [postFeature.name]: postFeature.reducer },
+      { 
+        [postFeature.name]: postFeature.reducer,
+        [chatFeature.name]: chatFeature.reducer,
+        filters: filterReducer 
+      },
     ),
-    provideState({name: 'filters', reducer: filterReducer}),
-    // provideEffects()
-    provideEffects([PostEffects, ProfileEffects])
+    provideEffects([PostEffects, ProfileEffects, ChatEffects])
   ],
 };

@@ -10,7 +10,7 @@ export const selectFilteredProfiles = createSelector(
 
 export const selectFilterState = createFeatureSelector<ProfileFilter>('filters');
 
-export const selectFilteValues = createSelector(
+export const selectFilterValues = createSelector(
     selectFilterState,
     (state) => state
 )
