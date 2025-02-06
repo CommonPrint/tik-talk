@@ -9,6 +9,7 @@ import { LoginPageComponent } from 'libs/auth/src/lib/feature-login';
 import { provideState } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 import { ProfileEffects, profileFeature } from 'libs/profile/src/lib/data';
+import {FormsExperimentComponent} from '@tt/experimental';
 
 export const routes: Routes = [
   {
@@ -24,18 +25,16 @@ export const routes: Routes = [
           provideEffects(ProfileEffects) 
         ]
       },
-      { path: 'profile/:id', component: ProfilePageComponent },
+      { path: 'profile/:id', component: ProfilePageComponent, },
       { path: 'settings', component: SettingsPageComponent },
       {
         path: 'chats',
         loadChildren: () => chatsRoutes,
-      },
+      }
     ],
     canActivate: [canActivateAuth],
   },
   { path: 'login', component: LoginPageComponent },
+  {path: 'experimental', component: FormsExperimentComponent}
 ];
-function provideEffect(): import("@angular/core").Provider | import("@angular/core").EnvironmentProviders {
-  throw new Error('Function not implemented.');
-}
 
