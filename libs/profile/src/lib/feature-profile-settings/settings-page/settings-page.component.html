@@ -29,17 +29,14 @@
     </label>
 
     <label class="tt-form-label">
-      <span class="tt-form-label__text">О себе</span>
+      <span class="tt-form-label__text">Аватар</span>
       <app-avatar-upload></app-avatar-upload>
     </label>
 
-    <label class="tt-form-label">
-      <span class="tt-form-label__text">Навыки (стэк)</span>
-      <textarea class="tt-form-input" formControlName="stack"></textarea>
-    </label>
+    <tt-stack-input formControlName="stack"></tt-stack-input>
   </div>
 
-  <div>
+  <div class="mt20">
     <div>
       <button class="btn" (click)="onSave()">Сохранить</button>
     </div>
