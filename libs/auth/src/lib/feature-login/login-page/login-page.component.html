@@ -9,25 +9,17 @@
     Telegram username
   </tt-input>
   
-  <!-- <label class="tt-control-label mb16">
-    Telegram username
-    <input
-      formControlName="username"
-      class="tt-input mt8"
-      type="text"
-      placeholder="Введите логин"
-    />
-  </label> -->
-
-  <label class="tt-control-label mb32">
+  <tt-input
+    type="password"
+    placeholder="Введите пароль"
+    formControlName="password"
+  >
     Пароль
-    <input
-      formControlName="password"
-      class="tt-input mt8"
-      type="text"
-      placeholder="Введите пароль"
-    />
-  </label>
+  </tt-input>
+
+  <!-- Рейтинг -->
+  <!-- <tt-rating formControlName="rating"></tt-rating>
+  <p>Your rating: {{ form.value.rating }}</p> -->
 
   <button class="btn btn-shadow" type="submit">Войти</button>
 </form>

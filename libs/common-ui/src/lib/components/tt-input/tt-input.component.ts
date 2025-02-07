@@ -1,14 +1,21 @@
-import { Component, forwardRef, input, signal } from '@angular/core';
+import { Component, computed, forwardRef, input, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { 
   ControlValueAccessor, FormsModule, 
   NG_VALUE_ACCESSOR, ReactiveFormsModule 
 } from '@angular/forms';
+import { SvgIconComponent } from '../svg-icon/svg-icon.component';
+
 
 @Component({
   selector: 'tt-input',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule],
+  imports: [
+    CommonModule, 
+    ReactiveFormsModule, 
+    FormsModule, 
+    SvgIconComponent
+  ],
   templateUrl: './tt-input.component.html',
   styleUrl: './tt-input.component.scss',
   providers: [
@@ -22,6 +29,8 @@ import {
 export class TtInputComponent implements ControlValueAccessor {
   
   type = input<'text' | 'password'>('text');
+  localType: string = '';
+
   placeholder = input<string>();
 
   onChange: any;
@@ -47,7 +56,16 @@ export class TtInputComponent implements ControlValueAccessor {
     console.log(isDisabled);
   }
 
+  ngOnInit() {
+    this.localType = this.type() || 'text';
+  }
+
   onModelChange(val: string | null): void {
     this.onChange(val);
   }
+
+  togglePasswordVisibility(newType: string): void {
+    this.localType = newType;
+  }
+
 }

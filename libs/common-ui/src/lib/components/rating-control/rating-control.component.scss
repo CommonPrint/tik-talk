@@ -1,0 +1,14 @@
+.rating-control {
+    display: inline-flex;
+    cursor: pointer;
+}
+
+.rating-control span {
+    font-size: 24px;
+    color: #ddd;
+    user-select: none;
+}
+
+.rating-control span.filled {
+    color: #ffca28;
+}

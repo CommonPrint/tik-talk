@@ -1,12 +1,35 @@
 <label class="tt-control-label mb16">
-    <ng-content></ng-content>
-    <input
-        [ngModel]="value"
-        (ngModelChange)="onModelChange($event)"
-        class="tt-input mt8"
-        [type]="type()"
-        [placeholder]="placeholder()"
-        (blur)="onTouched()"
-        [disabled]="disabled()"
-    />
+        <ng-content></ng-content>
+
+        @if(type() === 'password') {
+            <div class="password-wrapper">
+                <input
+                    [ngModel]="value"
+                    (ngModelChange)="onModelChange($event)"
+                    class="tt-input mt8 password"
+                    [type]="localType"
+                    [placeholder]="placeholder()"
+                    (blur)="onTouched()"
+                    [disabled]="disabled()"
+                />
+                <ng-container *ngIf="localType === 'password'; else hideEye">
+                    <svg icon="eye" class="svg24 eye" (click)="togglePasswordVisibility('text')"></svg>
+                </ng-container>
+                <ng-template #hideEye>
+                    <svg icon="hide-eye" class="svg24 hide-eye" (click)="togglePasswordVisibility('password')"></svg>
+                </ng-template>
+            </div>
+        }
+
+        @else {
+            <input
+                [ngModel]="value"
+                (ngModelChange)="onModelChange($event)"
+                class="tt-input mt8"
+                [type]="type()"
+                [placeholder]="placeholder()"
+                (blur)="onTouched()"
+                [disabled]="disabled()"
+            />
+        }
 </label>

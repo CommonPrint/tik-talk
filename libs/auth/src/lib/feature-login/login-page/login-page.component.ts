@@ -1,3 +1,4 @@
+import { RatingControlComponent } from '@tt/common-ui';
 import { TtInputComponent } from '@tt/common-ui';
 import { Component, inject } from '@angular/core';
 import {
@@ -12,7 +13,7 @@ import { AuthService } from '@tt/auth';
 @Component({
   selector: 'app-login-page',
   standalone: true,
-  imports: [ReactiveFormsModule, TtInputComponent],
+  imports: [ReactiveFormsModule, TtInputComponent, RatingControlComponent],
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.scss',
 })
@@ -21,8 +22,9 @@ export class LoginPageComponent {
   router = inject(Router);
 
   form = new FormGroup({
-    username: new FormControl<string | null>('USERNAME', Validators.required),
+    username: new FormControl<string | null>('', Validators.required),
     password: new FormControl<string | null>(null, Validators.required),
+    // rating: new FormControl<number | null>(0, Validators.required),
   });
 
   ngOnInit() {
@@ -30,7 +32,7 @@ export class LoginPageComponent {
       console.log(val);
     });
 
-    this.form.controls.username.disable();
+    // this.form.controls.username.disable();
   }
 
   onSubmit() {
