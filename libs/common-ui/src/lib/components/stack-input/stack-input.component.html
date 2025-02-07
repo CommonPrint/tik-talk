@@ -14,7 +14,10 @@
     
     <input
         [(ngModel)]="innerInput"
-        type="text" 
+        type="text"
         class="stack-ghost-input"
     >
+    <button type="button" (click)="addItem()">
+        {{addButtonLabel()}}
+    </button>
 </div>

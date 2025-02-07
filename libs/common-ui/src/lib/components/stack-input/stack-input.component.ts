@@ -1,4 +1,4 @@
-import { Component, forwardRef, HostListener, signal } from '@angular/core';
+import { Component, forwardRef, HostListener, input, signal } from '@angular/core';
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
@@ -23,6 +23,10 @@ export class StackInputComponent implements ControlValueAccessor {
   value$ = new BehaviorSubject<string[]>([]);
   #disabled = false;
 
+  // данный инпут будет служить параметром для нашего компонента, чтобы родительский
+  // компонент мог передать в него значение через контроллер (контрол)
+  addButtonLabel = input<string>('');
+
   @HostListener('class.disabled')
   get disabled(): boolean {
     return this.#disabled;
@@ -30,17 +34,26 @@ export class StackInputComponent implements ControlValueAccessor {
 
   innerInput = '';
 
-  @HostListener('keydown.enter', ['$event'])
-  onEnter(event: KeyboardEvent) {
-    event?.stopPropagation();
-    event?.preventDefault();
-    
-    if(!this.innerInput) return;
+  // Добавить новый тег с помощью мышки, а не за счет клавиши Enter
+  addItem() {
+    if(!this.innerInput) {return;}
 
     this.value$.next([...this.value$.value, this.innerInput]);
     this.innerInput = '';
     this.onChange(this.value$.value)
   }
+
+  // @HostListener('keydown.enter', ['$event'])
+  // onEnter(event: KeyboardEvent) {
+  //   event?.stopPropagation();
+  //   event?.preventDefault();
+    
+  //   if(!this.innerInput) return;
+
+  //   this.value$.next([...this.value$.value, this.innerInput]);
+  //   this.innerInput = '';
+  //   this.onChange(this.value$.value)
+  // }
 
   writeValue(stack: string[] | null): void {
     if(!stack) {
@@ -61,13 +74,9 @@ export class StackInputComponent implements ControlValueAccessor {
     this.#disabled = isDisabled;
   }
 
-  onChange(value: string[] | null) {
-    
-  }
+  onChange(value: string[] | null) {}
 
-  onTouched() {
-
-  }
+  onTouched() {}
 
   onTagDelete(i: number) {
     const tags = this.value$.value;
