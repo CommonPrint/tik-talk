@@ -5,6 +5,7 @@ import { ProfileService } from '@tt/profile';
 import { ProfileHeaderComponent } from '../../ui/profile-header/profile-header.component';
 import { AvatarUploadComponent } from '../../ui/avatar-upload/avatar-upload.component';
 import { StackInputComponent } from "../../../../../common-ui/src/lib/components/stack-input/stack-input.component";
+import { AddressInputComponent } from '@tt/common-ui';
 
 @Component({
   selector: 'app-settings-page',
@@ -13,7 +14,8 @@ import { StackInputComponent } from "../../../../../common-ui/src/lib/components
     ProfileHeaderComponent, 
     AvatarUploadComponent, 
     ReactiveFormsModule, 
-    StackInputComponent
+    StackInputComponent,
+    AddressInputComponent
   ],
   templateUrl: './settings-page.component.html',
   styleUrl: './settings-page.component.scss',
@@ -29,7 +31,8 @@ export class SettingsPageComponent {
     lastName: ['', Validators.required],
     username: [{ value: '', disabled: true }, Validators.required],
     description: [''],
-    stack: [{value: '', disabled: false}],
+    stack: [''],
+    city: [null]
   });
 
   constructor() {

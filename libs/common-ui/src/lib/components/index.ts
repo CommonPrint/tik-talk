@@ -1,3 +1,4 @@
+import { AddressInputComponent } from './address-input/address-input.component';
 import { StackInputComponent } from './stack-input/stack-input.component';
 import { AvatarCircleComponent } from "./avatar-circle/avatar-circle.component";
 import { DateFormatComponent } from "./date-format/date-format.component";
@@ -11,5 +12,6 @@ export {
     DateFormatComponent,
     TtInputComponent,
     RatingControlComponent,
-    StackInputComponent
+    StackInputComponent,
+    AddressInputComponent
 }
