@@ -1,6 +1,6 @@
-import { Component, forwardRef, inject, signal } from '@angular/core';
+import { Component, forwardRef, inject, Input, signal } from '@angular/core';
 import { AsyncPipe, CommonModule, JsonPipe } from '@angular/common';
-import { ControlValueAccessor, FormControl, FormGroup, FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
+import { ControlValueAccessor, FormBuilder, FormControl, FormGroup, FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TtInputComponent } from "../tt-input/tt-input.component";
 import { DadataService } from '../../data';
 import { debounceTime, switchMap, tap } from 'rxjs';
@@ -10,19 +10,17 @@ import { DadataSuggestion } from '../../data/interfaces/dadata.interface';
   selector: 'tt-address-input',
   standalone: true,
   imports: [
-    CommonModule, 
     ReactiveFormsModule, 
     TtInputComponent,
-    AsyncPipe,
-    JsonPipe
+    AsyncPipe
   ],
   templateUrl: './address-input.component.html',
   styleUrl: './address-input.component.scss',
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      multi: true,
-      useExisting: forwardRef(() => AddressInputComponent)
+      useExisting: forwardRef(() => AddressInputComponent),
+      multi: true
     }
   ]
 })
@@ -32,11 +30,11 @@ export class AddressInputComponent implements ControlValueAccessor {
   #dadataService = inject(DadataService);
 
   isDropdownOpened = signal<boolean>(true);
-
-  addressForm = new FormGroup({
+  
+  address = new FormGroup({
     city: new FormControl(''),
     street: new FormControl(''),
-    building: new FormControl(''),
+    building: new FormControl('')
   })
 
   suggestions$ = this.innerSearchControl.valueChanges
@@ -52,14 +50,20 @@ export class AddressInputComponent implements ControlValueAccessor {
       })
     )
 
-  writeValue(city: string | null): void {
-    this.innerSearchControl.patchValue(city, {
-      emitEvent: false
-    })
+  
+  writeValue(value: any): void {
+    console.log('value: ', value);
+    if(value) {
+      this.address.patchValue(value, {emitEvent: false})
+    }
   }
 
-  setDisabledState?(isDisabled: boolean): void {
+  setDisabledState(isDisabled: boolean): void {
   }
+
+  onChange(value: any): void {}
+
+  onTouched(): void {}
   
   registerOnChange(fn: any): void {
     this.onChange = fn;
@@ -69,22 +73,25 @@ export class AddressInputComponent implements ControlValueAccessor {
     this.onTouched = fn;
   }
   
-  onChange(value: any): void {}
-
-  onTouched(): void {}
-
   onSuggestionPick(suggest: DadataSuggestion) {
     this.isDropdownOpened.set(false);
-    // this.innerSearchControl.patchValue(city, {
-    //   emitEvent: false
-    // })
-    // this.onChange(city)
 
-    this.addressForm.patchValue({
+    console.log('suggest: ', suggest.data);
+
+    this.address.patchValue({
       city: suggest.data.city,
       street: suggest.data.street, 
       building: suggest.data.house
     })
+
+    // Уведомляем о новых данных
+    this.onChange(this.address.value);
+  }
+
+  ngOnInit() {
+    this.address.valueChanges.subscribe(value => {
+      this.onChange(value);
+    });
   }
 
 }

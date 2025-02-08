@@ -1,5 +1,5 @@
 import { Component, effect, inject, ViewChild } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { firstValueFrom } from 'rxjs';
 import { ProfileService } from '@tt/profile';
 import { ProfileHeaderComponent } from '../../ui/profile-header/profile-header.component';
@@ -26,13 +26,26 @@ export class SettingsPageComponent {
 
   @ViewChild(AvatarUploadComponent) avatarUploader: any;
 
+  // form = this.fb.group({
+  //   firstName: ['', Validators.required],
+  //   lastName: ['', Validators.required],
+  //   username: [{ value: '', disabled: true }, Validators.required],
+  //   description: [''],
+  //   stack: [''],
+  //   city: [null]
+  // });
+  
   form = this.fb.group({
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
     username: [{ value: '', disabled: true }, Validators.required],
     description: [''],
     stack: [''],
-    city: [null]
+    address: new FormGroup({
+      city: new FormControl(''),
+      street: new FormControl(''),
+      building: new FormControl('')
+    })
   });
 
   constructor() {

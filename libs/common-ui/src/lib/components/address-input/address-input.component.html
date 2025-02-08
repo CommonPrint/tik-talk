@@ -1,7 +1,7 @@
 <tt-input
+    placeholder="Введите адрес"
     [formControl]="innerSearchControl"
 ></tt-input>
-
 
 @if(suggestions$ | async; as suggestions) {
     @if(isDropdownOpened()) {
@@ -18,8 +18,17 @@
     }
 }
 
-<div [formGroup]="addressForm">
-    <tt-input formControlName="city" placeholder="Город">Город</tt-input>
-    <tt-input formControlName="street" placeholder="Улица">Улица</tt-input>
-    <tt-input formControlName="building" placeholder="Дом">Дом</tt-input>
+<div [formGroup]="address">
+    <tt-input
+      formControlName="city"
+      placeholder="Город"
+    >Город</tt-input>
+    <tt-input
+      formControlName="street"
+      placeholder="Улица"
+    >Улица</tt-input>
+    <tt-input
+      formControlName="building"
+      placeholder="Дом"
+    >Дом</tt-input>
 </div>
