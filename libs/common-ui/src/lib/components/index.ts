@@ -1,3 +1,4 @@
+import { InfiniteScrollTriggerComponent } from './infinite-scroll-trigger/infinite-scroll-trigger.component';
 import { AddressInputComponent } from './address-input/address-input.component';
 import { StackInputComponent } from './stack-input/stack-input.component';
 import { AvatarCircleComponent } from "./avatar-circle/avatar-circle.component";
@@ -13,5 +14,6 @@ export {
     TtInputComponent,
     RatingControlComponent,
     StackInputComponent,
-    AddressInputComponent
+    AddressInputComponent,
+    InfiniteScrollTriggerComponent
 }
