@@ -1,11 +1,11 @@
 <div class="messages-wrapper mb20">
-  <!-- @for(message of messages(); track message.id) {
-        <app-chat-workspace-message
-            [message]="message"
-        ></app-chat-workspace-message>
-    } -->
+  @for (message of messages(); track message.id) {
+    <app-chat-workspace-message
+        [message]="message"
+      ></app-chat-workspace-message>
+  }
 
-  @for (date of uniqueDates; track $index) {
+  <!-- @for (date of uniqueDates; track $index) {
     @if (date === today.date && today.isToday) {
       <h3 class="messages-wrapper__date medium-text">Сегодня</h3>
     } @else {
@@ -19,7 +19,7 @@
         ></app-chat-workspace-message>
       }
     }
-  }
+  } -->
 
   <!-- <ng-container *ngFor="let message of messages | keyvalue">
         <h3>{{message.key}}</h3>

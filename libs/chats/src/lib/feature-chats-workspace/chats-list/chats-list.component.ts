@@ -35,8 +35,7 @@ export class ChatsListComponent {
   chats$ = computed(() => {
     const filterValue = this.filterText().toLowerCase().trim();
     const chats = this.allChats$();
-
-    console.log('работает? ', chats);
+    
     return !filterValue
       ? chats
       : chats.filter(chat => chat.userFrom.firstName.toLowerCase().includes(filterValue) || chat.userFrom.lastName.toLowerCase().includes(filterValue));

@@ -1,5 +1,6 @@
 import {
   Component,
+  computed,
   ElementRef,
   inject,
   input,
@@ -30,14 +31,12 @@ export class ChatWorkspaceMessagesWrapperComponent implements OnInit {
   chat = input.required<Chat>();
 
   messages: any = this.chatsService.activeChatMessages;
+  // messages: any = computed(() => this.chatsService.activeChatMessages());
 
   uniqueDates = this.chatsService.uniqueDates;
 
   today = { date: '', isToday: false };
   scrollContainer: any;
-
-  rxJsTimer = timer(0, 10000);
-  timer!: number;
 
   ngOnInit() {
     let date = new Date();
@@ -45,15 +44,6 @@ export class ChatWorkspaceMessagesWrapperComponent implements OnInit {
     this.today.isToday = this.messages().includes(this.today);
 
     this.scrollContainer = this.hostElement.nativeElement.firstChild;
-
-    // Периодический запрос на сервер для получения новых сообщений чата
-    this.rxJsTimer
-      .pipe(switchMap(() => this.chatsService.getChatById(this.chat().id)))
-      .subscribe(() => {
-        this.messages = this.chatsService.activeChatMessages;
-
-        this.scrollToBottom();
-      });
   }
 
   ngAfterViewInit() {
@@ -61,32 +51,11 @@ export class ChatWorkspaceMessagesWrapperComponent implements OnInit {
   }
 
   async onSendMessage(msgText: string) {
-    const message: any = await firstValueFrom(
-      this.chatsService.sendMessage(this.chat().id, msgText),
+    this.chatsService.wsAdapter.sendMessage(
+      msgText,
+      this.chat().id
     );
-
-    console.log('msgText: ', msgText);
-
-    // Добавляем дополнительные свойства к новому сообщению
-    // const patchedMessage = [{
-    //     ...message,
-    //     user: this.messages()[0].length > 0
-    //         ? (this.messages()[0].userFromId === message.userFromId
-    //             ? this.messages()[0].user
-    //             : this.me()) // Используем первого пользователя для определения user
-    //         : this.me(),
-    //     isMine: message.userFromId === this.me()!.id,
-    //   },
-    //   {
-    //     ...message,
-    //     user: this.chat().companion,
-    //     isMine: false
-    //   }
-    // ]
-
-    // Обновляем массив сообщений
-    //  const updatedMessages = [...this.messages(), ...patchedMessage];
-    //  this.chatsService.activeChatMessages.set(updatedMessages);
+    this.scrollToBottom();
   }
 
   scrollToBottom(): void {
@@ -94,6 +63,5 @@ export class ChatWorkspaceMessagesWrapperComponent implements OnInit {
       top: this.scrollContainer.scrollHeight,
       behavior: 'smooth',
     });
-    // this.scrollContainer.scrollTop = this.scrollContainer.scrollTopMax;
   }
 }
