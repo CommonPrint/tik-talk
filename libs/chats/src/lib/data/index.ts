@@ -1,8 +1,10 @@
 import { ChatsService } from "./services/chats.service";
+import { isErrorMessage } from "./interfaces/type-guards";
 
 export {
-    ChatsService
+    ChatsService,
+    isErrorMessage
 };
 
 export * from './interfaces/chats.interface';
-export * from './store'
+export * from './store';

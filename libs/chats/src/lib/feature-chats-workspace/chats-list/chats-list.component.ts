@@ -1,19 +1,16 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { ChatsBtnComponent } from '../chats-btn/chats-btn.component';
-import { AsyncPipe } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { chatActions, ChatsService, selectChats } from '../../data';
 import { Store } from '@ngrx/store';
-import { combineLatest, debounceTime, map, startWith, Subscription, switchMap } from 'rxjs';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { debounceTime } from 'rxjs';
 
 @Component({
   selector: 'app-chats-list',
   standalone: true,
   imports: [
     ChatsBtnComponent,
-    AsyncPipe,
     RouterLink,
     RouterLinkActive,
     ReactiveFormsModule,

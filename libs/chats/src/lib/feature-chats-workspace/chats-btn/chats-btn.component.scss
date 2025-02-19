@@ -5,7 +5,7 @@
   border-bottom: var(--light-color);
   padding: 24px 20px;
   display: grid;
-  grid-template-columns: 32px 1fr;
+  grid-template-columns: 32px 1fr 32px;
   grid-gap: 16px;
   cursor: pointer;
 }
@@ -26,4 +26,15 @@
 
 .chat-user {
   color: var(--light-transparent-color);
+}
+
+.unread-messages {
+  display: flex;
+  align-self: center;
+  width: min-content;
+  padding: 8px;
+  font-size: 12px;
+  border-radius: 2px;
+  color: var(--dark-color);
+  background-color: var(--primary-color);
 }

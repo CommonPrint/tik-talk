@@ -31,7 +31,6 @@ export class ChatWorkspaceMessagesWrapperComponent implements OnInit {
   chat = input.required<Chat>();
 
   messages: any = this.chatsService.activeChatMessages;
-  // messages: any = computed(() => this.chatsService.activeChatMessages());
 
   uniqueDates = this.chatsService.uniqueDates;
 

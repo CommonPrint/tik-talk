@@ -8,8 +8,8 @@ import { ProfileService } from '@tt/profile';
 import { ChatWsService } from '../interfaces/chat-ws-service.interface';
 import { ChatWsNativeService } from './chat-ws-native.service';
 import { ChatWSMessage } from '../interfaces/chat-ws-message.interface';
-import { isNewMessage, isUnreadMessage } from '../interfaces/type-guards';
-import { ChatWSRxjsService } from '../interfaces/chat-ws-rxjs.service';
+import { isErrorMessage, isNewMessage, isUnreadMessage } from '../interfaces/type-guards';
+import { ChatWSRxjsService } from './chat-ws-rxjs.service';
 
 @Injectable({
   providedIn: 'root',
@@ -23,7 +23,7 @@ export class ChatsService {
 
   // Чтобы сообщения в чате при переключении между чатами обновлялись
   activeChatMessages = signal<Message[]>([]);
-  anotherUser = null;
+  unreadMessagesCount = signal<number>(0);
 
   uniqueDates!: string[];
 
@@ -43,15 +43,24 @@ export class ChatsService {
 
   // TODO Замыкания
   handleWSMessage = (message: ChatWSMessage) => {
-
+  
     if(!('action' in message)) return
 
     if(isUnreadMessage(message)) {
-      // TODO
+      this.unreadMessagesCount.set(message.data.count);
     }
 
-    if(isNewMessage(message)) {
+    if(isNewMessage(message) 
+        && (message.data.chat_id === this.activeChatMessages()[0].personalChatId)) {
       
+      // Проверка на дублирующиеся сообщения
+      const isDuplicate = this.activeChatMessages().some(msg => msg.id === message.data.id);
+      
+      if (isDuplicate) {
+          console.warn("Дубликат сообщения, игнорируем:", message);
+          return;
+      }
+
       this.activeChatMessages.set([
         ...this.activeChatMessages(),
         {
@@ -62,14 +71,11 @@ export class ChatsService {
           createdAt: message.data.created_at,
           isRead: false,
           isMine: message.data.author === this.me()?.id,
-          user:  message.data.author === this.me()?.id ? this.me() : null
+          user: message.data.author === this.me()?.id ? this.me() : null
         }
       ]);
-
-      console.log('user', this.me());
-      console.log('it was a new message', message);
-      console.log('activeChatMessages:', this.activeChatMessages());
     }
+
   }
 
 
@@ -118,7 +124,7 @@ export class ChatsService {
       {},
       {
         params: {
-          message,
+          message
         },
       },
     );

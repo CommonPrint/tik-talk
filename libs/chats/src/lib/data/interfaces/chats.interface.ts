@@ -20,9 +20,17 @@ export interface Message {
   isMine?: boolean;
 }
 
+// export interface LastMessageRes {
+//   companion: any;
+//   id: number;
+//   userFrom: Profile;
+//   message: string | null;
+// }
+
 export interface LastMessageRes {
   companion: any;
   id: number;
   userFrom: Profile;
   message: string | null;
+  unreadMessages: number
 }
