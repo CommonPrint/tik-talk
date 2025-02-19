@@ -51,8 +51,6 @@ export class ChatWSRxjsService implements ChatWsService {
         if(this.#authService.token) {
             this.#socket?.complete();
 
-            console.log('Токен обновлен!');
-
             this.connect({
                 url: params.url,
                 token: this.#authService.token!,

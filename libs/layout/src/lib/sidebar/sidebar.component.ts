@@ -58,14 +58,14 @@ export class SidebarComponent implements OnInit {
   async reconnect() {
     console.log('reconnecting...');
     await firstValueFrom(this.profileService.getMe());
-    await firstValueFrom(timer(2000));
+    await firstValueFrom(timer(1000));
     this.connectWs();
   }
 
 
   connectWs(): void {
     this.wsSubscribe?.unsubscribe();
-    
+
     // Подключаем WebSocket и обрабатываем сообщения
     this.wsSubscribe = this.chatsService.connectWs()
     .pipe(takeUntilDestroyed(this.destroyRef))
