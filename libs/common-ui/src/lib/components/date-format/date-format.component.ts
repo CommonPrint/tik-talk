@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { TimeFormatPipe } from '@tt/common-ui';
 
 @Component({
@@ -7,6 +7,7 @@ import { TimeFormatPipe } from '@tt/common-ui';
   imports: [TimeFormatPipe],
   templateUrl: './date-format.component.html',
   styleUrl: './date-format.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DateFormatComponent {
   dateFormat = input<string | null>();

@@ -1,4 +1,4 @@
-import { Component, computed, forwardRef, input, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, forwardRef, input, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { 
   ControlValueAccessor, FormsModule, 
@@ -24,7 +24,8 @@ import { SvgIconComponent } from '../svg-icon/svg-icon.component';
       multi: true,
       useExisting: forwardRef(() => TtInputComponent),
     }
-  ]
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TtInputComponent implements ControlValueAccessor {
   

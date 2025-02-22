@@ -9,5 +9,10 @@
     "lint": {
       "executor": "@nx/eslint:lint"
     }
+  },
+  "generators": {
+    "@nx/angular:component": {
+      "changeDetection": "OnPush"
+    }
   }
 }

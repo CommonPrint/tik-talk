@@ -51,7 +51,7 @@ export class ChatsService {
     }
 
     if(isNewMessage(message) 
-        && (message.data.chat_id === this.activeChatMessages()[0].personalChatId)) {
+        && (message.data.chat_id === this.activeChatMessages()[0]?.personalChatId)) {
       
       // Проверка на дублирующиеся сообщения
       const isDuplicate = this.activeChatMessages().some(msg => msg.id === message.data.id);

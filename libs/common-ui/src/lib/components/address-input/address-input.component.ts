@@ -1,4 +1,4 @@
-import { Component, forwardRef, inject, Input, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, inject, Input, signal } from '@angular/core';
 import { AsyncPipe, CommonModule, JsonPipe } from '@angular/common';
 import { ControlValueAccessor, FormBuilder, FormControl, FormGroup, FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TtInputComponent } from "../tt-input/tt-input.component";
@@ -22,7 +22,8 @@ import { DadataSuggestion } from '../../data/interfaces/dadata.interface';
       useExisting: forwardRef(() => AddressInputComponent),
       multi: true
     }
-  ]
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AddressInputComponent implements ControlValueAccessor {
 

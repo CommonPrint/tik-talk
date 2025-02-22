@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   HostBinding,
@@ -20,7 +21,8 @@ import { Store } from '@ngrx/store';
   standalone: true,
   imports: [AvatarCircleComponent, NgIf, SvgIconComponent, FormsModule],
   templateUrl: './post-input.component.html',
-  styleUrl: './post-input.component.scss'
+  styleUrl: './post-input.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PostInputComponent {
   // Renderer2 позволяет манипулировать элементом не изменяя сам DOM

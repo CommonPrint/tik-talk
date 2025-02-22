@@ -10,6 +10,8 @@ import { provideState } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 import { ProfileEffects, profileFeature } from 'libs/profile/src/lib/data';
 import {FormsExperimentComponent} from '@tt/experimental';
+import { RandomNumComponent } from 'libs/experimental/src/lib/random-num/random-num.component';
+import { ExperimentalComponent } from 'libs/experimental/src/lib/experimental/experimental.component';
 
 export const routes: Routes = [
   {
@@ -35,6 +37,7 @@ export const routes: Routes = [
     canActivate: [canActivateAuth],
   },
   { path: 'login', component: LoginPageComponent },
-  {path: 'experimental', component: FormsExperimentComponent}
+  {path: 'experimental', component: FormsExperimentComponent},
+  {path: 'experimental-2', component: ExperimentalComponent},
 ];
 

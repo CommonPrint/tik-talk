@@ -1,4 +1,4 @@
-import { Component, forwardRef, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -15,6 +15,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
       multi: true,
     }
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RatingControlComponent implements ControlValueAccessor {
 

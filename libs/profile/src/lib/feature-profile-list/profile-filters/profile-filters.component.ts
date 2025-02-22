@@ -1,12 +1,9 @@
-import { Component, inject, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnDestroy } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import {
   debounceTime,
-  filter,
-  first,
   startWith,
   Subscription,
-  switchMap,
 } from 'rxjs';
 import { ProfileService } from '@tt/profile';
 import { Store } from '@ngrx/store';
@@ -21,6 +18,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   imports: [ReactiveFormsModule],
   templateUrl: './profile-filters.component.html',
   styleUrl: './profile-filters.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProfileFiltersComponent implements OnDestroy {
 

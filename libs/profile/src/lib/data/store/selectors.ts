@@ -12,8 +12,8 @@ export const selectProfilePageable = createSelector(
     profileFeature.selectProfileFeatureState,
     (state) => {
         return {
-            page: state.page,
-            size: state.size
+            page: state?.page,
+            size: state?.size
         }
     }
 )

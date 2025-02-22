@@ -1,4 +1,4 @@
-import { Component, forwardRef, HostListener, input, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, HostListener, input, signal } from '@angular/core';
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
@@ -16,7 +16,8 @@ import { SvgIconComponent } from '../svg-icon/svg-icon.component';
       multi: true,
       useExisting: forwardRef(() => StackInputComponent)
     }
-  ]
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StackInputComponent implements ControlValueAccessor {
 

@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   computed,
   ElementRef,
@@ -20,6 +21,7 @@ import { Chat, ChatsService } from '../../../data';
   imports: [ChatWorkspaceMessageComponent, MessageInputComponent, CommonModule],
   templateUrl: './chat-workspace-messages-wrapper.component.html',
   styleUrl: './chat-workspace-messages-wrapper.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChatWorkspaceMessagesWrapperComponent implements OnInit {
   hostElement = inject(ElementRef);
