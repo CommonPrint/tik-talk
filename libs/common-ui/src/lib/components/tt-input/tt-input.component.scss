@@ -1,0 +1,15 @@
+.password-wrapper {
+    position: relative; 
+    width: min-content;
+}
+
+.eye, .hide-eye {
+    position: absolute; 
+    top: 12px;
+    right: 8px;
+    cursor: pointer;
+}
+
+.eye:hover, .hide-eye:hover {
+    opacity: 0.7;
+}

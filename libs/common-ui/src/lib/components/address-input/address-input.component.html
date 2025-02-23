@@ -1,0 +1,34 @@
+<tt-input
+    placeholder="Введите адрес"
+    [formControl]="innerSearchControl"
+></tt-input>
+
+@if(suggestions$ | async; as suggestions) {
+    @if(isDropdownOpened()) {
+        <div class="suggestions-dropdown">
+                @for(suggest of suggestions; track suggest) {
+                    <button
+                        class="suggest-btn"
+                        (click)="onSuggestionPick(suggest)"
+                    >
+                        {{suggest.data.city}} {{suggest.data.street}} {{suggest.data.house}}
+                    </button>
+                }
+        </div>
+    }
+}
+
+<div [formGroup]="address">
+    <tt-input
+      formControlName="city"
+      placeholder="Город"
+    >Город</tt-input>
+    <tt-input
+      formControlName="street"
+      placeholder="Улица"
+    >Улица</tt-input>
+    <tt-input
+      formControlName="building"
+      placeholder="Дом"
+    >Дом</tt-input>
+</div>

@@ -1,0 +1,65 @@
+<app-profile-header></app-profile-header>
+
+<form class="profile-form__wrapper" [formGroup]="form">
+  <div class="profile-form">
+    <div class="two-columns">
+      <label class="tt-form-label">
+        <span class="tt-form-label__text">Имя</span>
+        <input type="text" class="tt-form-input" formControlName="firstName" />
+      </label>
+
+      <label class="tt-form-label">
+        <span class="tt-form-label__text">Фамилия</span>
+        <input type="text" class="tt-form-input" formControlName="lastName" />
+      </label>
+    </div>
+
+    <label class="tt-form-label">
+      <span class="tt-form-label__text">Telegram username</span>
+      <input type="text" class="tt-form-input" formControlName="username" />
+    </label>
+
+    <label class="tt-form-label">
+      <span class="tt-form-label__text">О себе</span>
+      <textarea
+        class="tt-form-input tt-textarea"
+        formControlName="description"
+        rows="4"
+      ></textarea>
+    </label>
+
+    <label class="tt-form-label">
+      <span class="tt-form-label__text">Аватар</span>
+      <app-avatar-upload></app-avatar-upload>
+    </label>
+
+    <tt-stack-input 
+      formControlName="stack"
+      [addButtonLabel]="'ADD'"
+    >
+    </tt-stack-input>
+
+    <!-- <tt-address-input
+      formControlName="city"
+      formControlName="street"
+      formControlName="building"
+    ></tt-address-input>
+     -->
+    
+     <!-- Вариант работает -->
+     <tt-address-input
+        formControlName="address"
+     ></tt-address-input>
+     
+      <!-- <tt-address-input
+        formGroupName="address"
+      ></tt-address-input> -->
+    
+  </div>
+
+  <div class="mt20">
+    <div>
+      <button class="btn" (click)="onSave()">Сохранить</button>
+    </div>
+  </div>
+</form>

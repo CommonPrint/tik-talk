@@ -1,0 +1,20 @@
+:host {
+  display: grid;
+  padding: 16px 20px;
+  grid-template-rows: 1fr min-content;
+}
+
+.messages-wrapper {
+  display: grid;
+  grid-gap: 12px;
+
+  height: 580px;
+  overflow-y: auto;
+}
+
+.messages-wrapper__date {
+  margin: 0 auto;
+  max-height: 30px;
+  padding: 6px 30px;
+  background-color: var(--dark-active-color);
+}
