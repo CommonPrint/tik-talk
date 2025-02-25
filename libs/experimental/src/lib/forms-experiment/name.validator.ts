@@ -1,9 +1,8 @@
 import {inject, Injectable} from '@angular/core';
-import {Profile} from '@tt/interfaces/profile';
 import {HttpClient} from '@angular/common/http';
-import {map, delay, Observable} from 'rxjs';
+import {map, Observable} from 'rxjs';
 import {AbstractControl, AsyncValidator, ValidationErrors} from '@angular/forms';
-
+import {Profile} from '@tt/data-access';
 
 @Injectable({
     providedIn: 'root'

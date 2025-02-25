@@ -1,11 +1,10 @@
 import {
   HttpHandlerFn,
-  HttpInterceptor,
   HttpInterceptorFn,
   HttpRequest,
 } from '@angular/common/http';
 import { inject } from '@angular/core';
-import { AuthService } from './auth.service';
+import { AuthService } from '@tt/data-access';
 import {
   BehaviorSubject,
   catchError,
@@ -73,12 +72,10 @@ const refreshAndProceed = (
 
   return isRefreshing$.pipe(
     filter((isRefreshing) => !isRefreshing),
-    switchMap((res) => {
+    switchMap(() => {
       return next(addToken(req, authService.token!));
     }),
   );
-
-  // return next(addToken(req, authService.token!));
 };
 
 const addToken = (req: HttpRequest<any>, token: string) => {

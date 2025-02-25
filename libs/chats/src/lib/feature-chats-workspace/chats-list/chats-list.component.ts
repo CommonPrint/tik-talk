@@ -2,9 +2,9 @@ import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@a
 import { ChatsBtnComponent } from '../chats-btn/chats-btn.component';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { chatActions, ChatsService, selectChats } from '../../data';
 import { Store } from '@ngrx/store';
 import { debounceTime } from 'rxjs';
+import { chatActions, ChatsService, selectChats } from '@tt/data-access';
 
 @Component({
   selector: 'app-chats-list',

@@ -2,9 +2,9 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ProfileFiltersComponent } from '../profile-filters/profile-filters.component';
 import { ProfileCardComponent } from '../../ui/profile-card/profile-card.component';
 import { Store } from '@ngrx/store';
-import { profileActions, selectFilteredProfiles } from '../../data';
 import { InfiniteScrollTriggerComponent } from "../../../../../common-ui/src/lib/components/infinite-scroll-trigger/infinite-scroll-trigger.component";
 import { InfiniteScrollDirective } from 'ngx-infinite-scroll';
+import { profileActions, selectFilteredProfiles } from '@tt/data-access';
 
 @Component({
   selector: 'app-search-page',

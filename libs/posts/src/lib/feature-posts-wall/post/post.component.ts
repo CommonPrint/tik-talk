@@ -1,10 +1,10 @@
 import { DatePipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Host, inject, input, OnInit, Optional, Self, signal, SkipSelf } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input, OnInit, signal } from '@angular/core';
 import {AvatarCircleComponent, SvgIconComponent} from '@tt/common-ui';
 import { firstValueFrom } from 'rxjs';
-import {Post, PostComment, PostService} from '../../data';
 import {CommentComponent, PostInputComponent} from '../../ui';
 import { COLOR, TIMELINE_SERVICE } from './color.token';
+import { Post, PostComment, PostService } from '@tt/data-access';
 
 @Component({
   selector: 'app-post',
@@ -22,7 +22,6 @@ import { COLOR, TIMELINE_SERVICE } from './color.token';
     {
       provide: TIMELINE_SERVICE,
       useExisting: PostService
-      // useValue: PostService,
     }
   ],
   changeDetection: ChangeDetectionStrategy.OnPush

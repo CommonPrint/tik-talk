@@ -1,7 +1,6 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  computed,
   ElementRef,
   inject,
   input,
@@ -9,11 +8,10 @@ import {
   Renderer2,
 } from '@angular/core';
 import { ChatWorkspaceMessageComponent } from './chat-workspace-message/chat-workspace-message.component';
-import { firstValueFrom, switchMap, timer } from 'rxjs';
-import { CommonModule, DatePipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { ProfileService } from '@tt/profile';
 import { MessageInputComponent } from 'libs/chats/src/lib/ui/message-input/message-input.component';
-import { Chat, ChatsService } from '../../../data';
+import { Chat, ChatsService } from '@tt/data-access';
 
 @Component({
   selector: 'app-chat-workspace-messages-wrapper',
@@ -34,7 +32,7 @@ export class ChatWorkspaceMessagesWrapperComponent implements OnInit {
 
   messages: any = this.chatsService.activeChatMessages;
 
-  uniqueDates = this.chatsService.uniqueDates;
+  // uniqueDates = this.chatsService.uniqueDates;
 
   today = { date: '', isToday: false };
   scrollContainer: any;
