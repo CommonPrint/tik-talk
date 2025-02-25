@@ -2,11 +2,11 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ChatWorkspaceHeaderComponent } from './chat-workspace-header/chat-workspace-header.component';
 import { ChatWorkspaceMessagesWrapperComponent } from './chat-workspace-messages-wrapper/chat-workspace-messages-wrapper.component';
 import { ActivatedRoute, Router } from '@angular/router';
-import { filter, of, shareReplay, switchMap } from 'rxjs';
+import { filter, of, switchMap } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
-import { chatActions, chatFeature, ChatsService, selectActiveChat } from '../../data';
 import { ProfileService } from '@tt/profile';
 import { Store } from '@ngrx/store';
+import { chatActions, chatFeature, ChatsService } from '@tt/data-access';
 
 @Component({
   selector: 'app-chat-workspace',
@@ -49,8 +49,6 @@ export class ChatWorkspaceComponent {
       return this.store.select(chatFeature.selectActiveChat).pipe(
         filter(chat => !!chat)
       )
-    
-      // return this.chatsService.getChatById(id);
     })
   );
   

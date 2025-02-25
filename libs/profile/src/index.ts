@@ -1,5 +1,5 @@
-import { Profile } from "../../interfaces/src/lib/profile/profile.interface";
-import { ProfileService } from "./lib/data/services/profile.service";
+import { Profile } from "../../data-access/src/lib/profile/interfaces/profile.interface";
+import { ProfileService } from "../../data-access/src/lib/profile/services/profile.service";
 
 export {
     Profile,

@@ -1,4 +1,3 @@
-import { ChatsService } from '@tt/chats';
 import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { AsyncPipe, NgForOf } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
@@ -7,7 +6,7 @@ import { firstValueFrom, Subscription, timer } from 'rxjs';
 import { ImgUrlPipe, SvgIconComponent } from '@tt/common-ui';
 import { ProfileService } from '@tt/profile';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { isErrorMessage } from '@tt/chats';
+import { ChatsService, isErrorMessage } from '@tt/data-access'
 
 @Component({
   selector: 'app-sidebar',

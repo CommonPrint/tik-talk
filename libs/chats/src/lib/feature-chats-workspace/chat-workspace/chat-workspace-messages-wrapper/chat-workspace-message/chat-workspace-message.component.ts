@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, HostBinding, input } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { AvatarCircleComponent } from '@tt/common-ui';
-import { Message } from 'libs/chats/src/lib/data';
+import { Message } from '@tt/data-access'
 
 @Component({
   selector: 'app-chat-workspace-message',

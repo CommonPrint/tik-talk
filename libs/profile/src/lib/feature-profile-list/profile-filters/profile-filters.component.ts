@@ -5,11 +5,15 @@ import {
   startWith,
   Subscription,
 } from 'rxjs';
-import { ProfileService } from '@tt/profile';
 import { Store } from '@ngrx/store';
-import { profileActions, selectFilterValues, setFilterValues} from '../../data';
-import { ProfileFilter } from '@tt/interfaces/profile';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { 
+  profileActions, 
+  ProfileFilter, 
+  ProfileService, 
+  selectFilterValues, 
+  setFilterValues 
+} from '@tt/data-access';
 
 
 @Component({

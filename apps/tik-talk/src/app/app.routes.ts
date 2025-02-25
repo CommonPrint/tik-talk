@@ -8,10 +8,9 @@ import { SettingsPageComponent } from 'libs/profile/src/lib/feature-profile-sett
 import { LoginPageComponent } from 'libs/auth/src/lib/feature-login';
 import { provideState } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
-import { ProfileEffects, profileFeature } from 'libs/profile/src/lib/data';
 import {FormsExperimentComponent} from '@tt/experimental';
-import { RandomNumComponent } from 'libs/experimental/src/lib/random-num/random-num.component';
 import { ExperimentalComponent } from 'libs/experimental/src/lib/experimental/experimental.component';
+import { ProfileEffects, profileFeature } from '@tt/data-access';
 
 export const routes: Routes = [
   {

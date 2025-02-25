@@ -1,10 +1,9 @@
-import { ChangeDetectionStrategy, Component, forwardRef, inject, Input, signal } from '@angular/core';
-import { AsyncPipe, CommonModule, JsonPipe } from '@angular/common';
-import { ControlValueAccessor, FormBuilder, FormControl, FormGroup, FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, forwardRef, inject, signal } from '@angular/core';
+import { AsyncPipe } from '@angular/common';
+import { ControlValueAccessor, FormControl, FormGroup, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 import { TtInputComponent } from "../tt-input/tt-input.component";
-import { DadataService } from '../../data';
 import { debounceTime, switchMap, tap } from 'rxjs';
-import { DadataSuggestion } from '../../data/interfaces/dadata.interface';
+import {DadataService, DadataSuggestion} from '@tt/data-access';
 
 @Component({
   selector: 'tt-address-input',
